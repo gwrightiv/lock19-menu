@@ -105,12 +105,12 @@
     grid-template-columns: 1fr 1fr;
     gap: 80px;
   }
-  .col { display: flex; flex-direction: column; gap: 40px; }
+  .col { display: flex; flex-direction: column; gap: 32px; }
 
   .sec h2 {
     font-family: 'Playfair Display', serif;
     font-weight: 900;
-    font-size: 84px;
+    font-size: 76px;
     letter-spacing: -2px;
     line-height: 1;
     color: var(--cream);
@@ -132,7 +132,7 @@
     letter-spacing: 0.3em;
     color: var(--gold);
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
 
   .sec.signature h2 { color: var(--cream); }
@@ -149,7 +149,7 @@
     grid-template-columns: 1fr auto;
     align-items: baseline;
     gap: 32px;
-    padding: 14px 0;
+    padding: 11px 0;
     border-bottom: 2px dashed rgba(255, 248, 238, 0.10);
   }
   .item:last-child { border-bottom: none; }
@@ -165,11 +165,12 @@
     display: block;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
-    font-size: 26px;
+    font-size: 25px;
+    line-height: 1.35;
     letter-spacing: 0.01em;
     color: var(--cream-dim);
     text-transform: none;
-    margin-top: 6px;
+    margin-top: 4px;
     font-style: italic;
   }
   .item .price {
@@ -184,7 +185,7 @@
 
   .signature .item .name { font-size: 56px; font-weight: 600; color: var(--cream); }
   .signature .item .price { font-size: 56px; color: var(--red); text-align: right; min-width: 130px; }
-  .signature .item { padding: 20px 0; border-bottom: 2px solid rgba(245, 197, 24, 0.18); }
+  .signature .item { padding: 14px 0; border-bottom: 2px solid rgba(245, 197, 24, 0.18); }
 
   .tiered {
     display: grid;
@@ -205,7 +206,7 @@
   .shakes-sec h2::after { order: 3; }
   .shakes-sec .sec-price { order: 2; }
 
-  .deluxe-line { margin-top: 24px; padding: 24px 32px; background: rgba(245, 197, 24, 0.08); border-left: 6px solid var(--gold); }
+  .deluxe-line { margin-top: 16px; padding: 18px 32px; background: rgba(245, 197, 24, 0.08); border-left: 6px solid var(--gold); }
   .deluxe-name { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 42px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--cream); display: flex; align-items: baseline; gap: 20px; }
   .deluxe-plus { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 42px; color: var(--gold); }
   .deluxe-desc { font-family: 'Inter', sans-serif; font-style: italic; font-size: 26px; color: var(--cream-dim); line-height: 1.5; margin-top: 10px; }
@@ -216,7 +217,7 @@
 
   .free-list { font-family: 'Oswald', sans-serif; font-size: 32px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--cream); line-height: 1.6; padding: 8px 0; }
 
-  .note { background: var(--gold); color: var(--char); font-family: 'Oswald', sans-serif; font-weight: 600; text-transform: uppercase; font-size: 28px; letter-spacing: 0.1em; padding: 16px 28px; display: inline-block; margin-bottom: 20px; transform: rotate(-1deg); }
+  .note { background: var(--gold); color: var(--char); font-family: 'Oswald', sans-serif; font-weight: 600; text-transform: uppercase; font-size: 26px; letter-spacing: 0.1em; padding: 12px 24px; display: inline-block; margin-bottom: 14px; transform: rotate(-1deg); }
   .note.red { background: var(--red); color: #FFF8EE; }
 
   .loaded-fries .item .name { font-size: 40px; }
@@ -260,12 +261,12 @@
   }
   .dessert-line .dl-sizes b { color: var(--cream); font-weight: 600; }
 
-  .combo-banner { background: var(--red); color: #FFF8EE; padding: 36px 48px; margin: 16px 0 0; display: flex; align-items: center; justify-content: space-between; gap: 40px; border: 4px solid var(--gold); box-shadow: 12px 12px 0 var(--char); }
+  .combo-banner { background: var(--red); color: #FFF8EE; padding: 24px 48px; margin: 8px 0 0; display: flex; align-items: center; justify-content: space-between; gap: 40px; border: 4px solid var(--gold); box-shadow: 8px 8px 0 var(--char); }
   .combo-banner .lead { font-family: 'Playfair Display', serif; font-weight: 900; font-style: italic; font-size: 56px; line-height: 1; }
   .combo-banner .sub { font-family: 'Oswald', sans-serif; font-size: 26px; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 8px; opacity: 0.85; }
   .combo-banner .price-tag { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 88px; color: #FFF8EE; line-height: 1; white-space: nowrap; }
 
-  .salad-desc { font-family: 'Inter', sans-serif; font-style: italic; font-size: 26px; color: var(--cream-dim); line-height: 1.5; margin-bottom: 16px; padding: 16px 24px; border-left: 4px solid var(--red); background: rgba(217, 43, 43, 0.06); }
+  .salad-desc { font-family: 'Inter', sans-serif; font-style: italic; font-size: 25px; color: var(--cream-dim); line-height: 1.4; margin-bottom: 12px; padding: 12px 24px; border-left: 4px solid var(--red); background: rgba(217, 43, 43, 0.06); }
 
   .foot { margin-top: 44px; padding-top: 28px; border-top: 4px solid var(--gold); display: flex; justify-content: space-between; align-items: center; font-family: 'Oswald', sans-serif; font-size: 26px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-dim); }
   .foot .dot { color: var(--red); margin: 0 24px; }
@@ -473,12 +474,16 @@
 </div>
 
 <script>
-  // We now KNOW: panel is a true 2160×3840, but content is ~4447px tall —
-  // taller than the screen. So fit to BOTH dimensions (whichever is
-  // tighter). For this portrait board that's the height, which scales
-  // the full width to fill edge-to-edge. No clip, no side bars.
+  // FILL WIDTH ALWAYS — no side bars, ever. scaleX = boxW/DESIGN_W.
+  // For height, allow a small vertical squish (up to MAX_SQUISH) so the
+  // board fits top-to-bottom without letterboxing. The squish is tiny
+  // (a few %) and imperceptible; it also absorbs the font-rendering
+  // differences between this player and any test browser. If content is
+  // SO tall that even max squish can't fit it, fall back to uniform
+  // scale-down so nothing ever clips.
   (function () {
     var DESIGN_W = 2160;
+    var MAX_SQUISH = 0.12;            // allow scaleY down to 88% of scaleX
     var viewport = document.getElementById('viewport');
     var stage = document.getElementById('stage');
     var menu = stage.querySelector('.menu');
@@ -488,19 +493,42 @@
       var boxH = viewport.clientHeight;
       var contentH = menu.scrollHeight;
       stage.style.height = contentH + 'px';
-      var scale = Math.min(boxW / DESIGN_W, boxH / contentH);
-      stage.style.transform = 'scale(' + scale + ')';
-      var left = (boxW - DESIGN_W * scale) / 2;
-      var top = (boxH - contentH * scale) / 2;
-      stage.style.left = (left > 0 ? left : 0) + 'px';
-      stage.style.top = (top > 0 ? top : 0) + 'px';
+
+      var scaleX = boxW / DESIGN_W;            // always fill width
+      var scaleYneeded = boxH / contentH;      // what height would require
+      var scaleY = scaleYneeded;
+      var mode = 'fill';
+
+      if (scaleY > scaleX) {
+        // content is SHORTER than the screen: don't stretch up, match X
+        scaleY = scaleX;
+        mode = 'fill';
+      } else if (scaleY < scaleX * (1 - MAX_SQUISH)) {
+        // content is too tall even for max squish: scale whole thing down
+        // uniformly (this can leave thin side bars, but only in the rare
+        // case the menu grows a lot — keeps everything visible).
+        scaleX = scaleY = scaleYneeded;
+        mode = 'shrink';
+      } else {
+        // content slightly too tall: squish vertically within allowance
+        mode = 'squish';
+      }
+
+      stage.style.transformOrigin = 'top left';
+      stage.style.transform = 'scaleX(' + scaleX + ') scaleY(' + scaleY + ')';
+      var usedW = DESIGN_W * scaleX;
+      var usedH = contentH * scaleY;
+      stage.style.left = (boxW > usedW ? (boxW - usedW) / 2 : 0) + 'px';
+      stage.style.top  = (boxH > usedH ? (boxH - usedH) / 2 : 0) + 'px';
+
       if (hud) {
         hud.textContent =
           'box ' + boxW + '×' + boxH +
-          ' | scale ' + scale.toFixed(3) +
+          ' | mode ' + mode +
+          ' | sX ' + scaleX.toFixed(3) + ' sY ' + scaleY.toFixed(3) +
+          ' | squish ' + (((scaleX - scaleY) / scaleX) * 100).toFixed(1) + '%' +
           ' | contentH ' + contentH +
-          ' | scaledH ' + Math.round(contentH * scale) +
-          ' | sideGap ' + Math.round(left);
+          ' | sideGap ' + Math.round((boxW - usedW) / 2);
       }
     }
     window.addEventListener('resize', fit);
