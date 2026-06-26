@@ -276,24 +276,9 @@
   #viewport { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; }
   #stage { position: absolute; top: 0; left: 0; width: 2160px; transform-origin: top left; }
 
-  /* Diagnostic readout */
-  #hud {
-    position: fixed;
-    top: 0; left: 0;
-    z-index: 9999;
-    background: #000;
-    color: #0f0;
-    font-family: monospace;
-    font-size: 22px;
-    padding: 8px 14px;
-    letter-spacing: 0;
-    white-space: nowrap;
-  }
 </style>
 </head>
 <body>
-
-<div id="hud">measuring…</div>
 
 <div id="viewport">
 <div id="stage">
@@ -487,7 +472,6 @@
     var viewport = document.getElementById('viewport');
     var stage = document.getElementById('stage');
     var menu = stage.querySelector('.menu');
-    var hud = document.getElementById('hud');
     function fit() {
       var boxW = viewport.clientWidth;
       var boxH = viewport.clientHeight;
@@ -520,16 +504,6 @@
       var usedH = contentH * scaleY;
       stage.style.left = (boxW > usedW ? (boxW - usedW) / 2 : 0) + 'px';
       stage.style.top  = (boxH > usedH ? (boxH - usedH) / 2 : 0) + 'px';
-
-      if (hud) {
-        hud.textContent =
-          'box ' + boxW + '×' + boxH +
-          ' | mode ' + mode +
-          ' | sX ' + scaleX.toFixed(3) + ' sY ' + scaleY.toFixed(3) +
-          ' | squish ' + (((scaleX - scaleY) / scaleX) * 100).toFixed(1) + '%' +
-          ' | contentH ' + contentH +
-          ' | sideGap ' + Math.round((boxW - usedW) / 2);
-      }
     }
     window.addEventListener('resize', fit);
     window.addEventListener('orientationchange', fit);
