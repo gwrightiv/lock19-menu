@@ -48,16 +48,16 @@
 
   /* Two-column body */
   .grid { display:grid; grid-template-columns:1fr 1fr; gap:54px; }
-  .col { display:flex; flex-direction:column; gap:22px; }
+  .col { display:flex; flex-direction:column; gap:16px; }
 
-  .sec h2 { font-family:'Playfair Display',serif; font-weight:900; font-size:44px; letter-spacing:-1px; line-height:1; color:var(--cream); display:flex; align-items:baseline; gap:20px; margin-bottom:6px; }
+  .sec h2 { font-family:'Playfair Display',serif; font-weight:900; font-size:40px; letter-spacing:-1px; line-height:1; color:var(--cream); display:flex; align-items:baseline; gap:20px; margin-bottom:6px; }
   .sec h2::after { content:''; flex:1; height:4px; background:var(--gold); transform:translateY(-9px); }
   .sec .kicker { font-family:'Oswald',sans-serif; font-size:18px; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; margin-bottom:10px; }
 
   .sec.signature h2::before { content:'★'; color:var(--red); font-size:44px; transform:translateY(-2px); }
 
   .items { list-style:none; }
-  .item { display:grid; grid-template-columns:1fr auto; align-items:baseline; gap:24px; padding:8px 0; border-bottom:2px dashed rgba(26,26,26,0.08); }
+  .item { display:grid; grid-template-columns:1fr auto; align-items:baseline; gap:24px; padding:5px 0; border-bottom:2px dashed rgba(26,26,26,0.08); }
   .item:last-child { border-bottom:none; }
   .item .name { font-family:'Oswald',sans-serif; font-weight:500; font-size:30px; letter-spacing:0.04em; text-transform:uppercase; color:var(--cream); }
   .item .desc { display:block; font-family:'Inter',sans-serif; font-weight:400; font-size:19px; line-height:1.35; letter-spacing:0.01em; color:var(--cream-dim); text-transform:none; margin-top:4px; font-style:italic; }
@@ -93,7 +93,7 @@
   .shakes-sec h2 { gap:18px; }
   .shakes-sec h2::after { order:3; }
   .shakes-sec .sec-price { order:2; }
-  .free-list { font-family:'Oswald',sans-serif; font-size:23px; font-weight:500; letter-spacing:0.05em; text-transform:uppercase; color:var(--cream); line-height:1.55; padding:6px 0; }
+  .free-list { font-family:'Oswald',sans-serif; font-size:21px; font-weight:500; letter-spacing:0.05em; text-transform:uppercase; color:var(--cream); line-height:1.4; padding:4px 0; }
   .dessert-line { display:flex; align-items:baseline; gap:16px; padding:10px 0 8px; border-bottom:2px solid rgba(245,197,24,0.18); }
   .dessert-line .dl-name { font-family:'Oswald',sans-serif; font-weight:600; font-size:28px; letter-spacing:0.04em; text-transform:uppercase; color:var(--cream); white-space:nowrap; }
   .dessert-line .dl-flavors { font-family:'Inter',sans-serif; font-style:italic; font-size:18px; color:var(--cream-dim); white-space:nowrap; }
@@ -108,6 +108,7 @@
 </style>
 </head>
 <body>
+<div id="hud" style="position:fixed;top:0;left:0;z-index:9999;background:#000;color:#0f0;font-family:monospace;font-size:16px;padding:6px 10px;white-space:nowrap;">measuring…</div>
 <div id="viewport">
 <div id="stage">
 <div class="menu">
@@ -191,9 +192,9 @@
           <h2>Add-Ons</h2>
           <div class="kicker" style="margin-top:8px;">Want it dressed? Make it a Deluxe</div>
           <div class="free-list">Lettuce · Onion · Tomato · Pickles · Sauce</div>
-          <div class="kicker" style="margin-top:11px;">Our sauces<span class="diet">gf</span></div>
+          <div class="kicker" style="margin-top:8px;">Our sauces<span class="diet">gf</span></div>
           <div class="free-list">Special Sauce · Tartar Sauce · Garlic Sauce · Ranch</div>
-          <div class="kicker" style="margin-top:11px;">Premium add-ons</div>
+          <div class="kicker" style="margin-top:8px;">Premium add-ons</div>
           <div class="topping-grid">
             <div class="row"><span>Extra Sauce</span><span class="v">.50</span></div>
             <div class="row"><span>Jalapeños</span><span class="v">.50</span></div>
@@ -213,10 +214,11 @@
 
 <script>
   (function () {
-    var DESIGN_W = 1920, MAX_SQUISH = 0.12;
+    var DESIGN_W = 1920, MAX_SQUISH = 0.22;
     var viewport = document.getElementById('viewport');
     var stage = document.getElementById('stage');
     var menu = stage.querySelector('.menu');
+    var hud = document.getElementById('hud');
     function fit() {
       var boxW = viewport.clientWidth, boxH = viewport.clientHeight;
       var contentH = menu.scrollHeight;
@@ -230,6 +232,7 @@
       var usedW = DESIGN_W * scaleX, usedH = contentH * scaleY;
       stage.style.left = (boxW > usedW ? (boxW - usedW) / 2 : 0) + 'px';
       stage.style.top  = (boxH > usedH ? (boxH - usedH) / 2 : 0) + 'px';
+      if(hud){var mode=(scaleY>=scaleX-0.001)?'fill':((scaleY>=scaleX*0.88)?'squish':'shrink');hud.textContent='box '+boxW+'×'+boxH+' | mode '+mode+' | sX '+scaleX.toFixed(3)+' sY '+scaleY.toFixed(3)+' | contentH '+contentH+' | sideGap '+Math.round((boxW-usedW)/2);}
     }
     window.addEventListener('resize', fit);
     window.addEventListener('orientationchange', fit);
