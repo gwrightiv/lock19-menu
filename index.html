@@ -10,10 +10,12 @@
 <style>
   :root {
     --char: #1A1A1A;
+    --char-2: #232323;
     --red: #C81E1E;
     --gold: #B8860B;
     --cream: #1A1A1A;
     --cream-dim: rgba(26, 26, 26, 0.66);
+    --rule: rgba(184, 134, 11, 0.55);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,6 +27,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Native 4K vertical: 2160 × 3840 */
   .menu {
     max-width: 2160px;
     margin: 0 auto;
@@ -36,7 +39,8 @@
     position: relative;
     overflow: hidden;
   }
-
+  
+  /* Chalkboard texture */
   .menu::before {
     content: '';
     position: absolute;
@@ -48,13 +52,24 @@
     mix-blend-mode: multiply;
   }
 
+  .menu::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 45%, rgba(120, 90, 30, 0.10) 100%);
+    pointer-events: none;
+  }
+
   .inner { position: relative; z-index: 2; }
 
+  /* ---------- MASTHEAD ---------- */
   .masthead {
     text-align: center;
-    padding-bottom: 28px;
+    padding-bottom: 32px;
     border-bottom: 4px solid var(--gold);
-    margin-bottom: 40px;
+    margin-bottom: 48px;
+    position: relative;
   }
 
   .masthead .logo {
@@ -65,16 +80,22 @@
     height: auto;
   }
 
+  /* Add class="logo invert" to the <img> tag if using the original DARK logo on dark background */
+  .masthead .logo.invert {
+    filter: invert(96%) sepia(8%) saturate(380%) hue-rotate(330deg) brightness(105%) contrast(100%);
+  }
+
   .masthead .tag {
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
     letter-spacing: 0.5em;
-    font-size: 30px;
-    margin-top: 20px;
+    font-size: 32px;
+    margin-top: 24px;
     color: var(--gold);
     text-transform: uppercase;
   }
 
+  /* ---------- DIETARY TAGS ---------- */
   .diet {
     font-family: 'Inter', sans-serif;
     font-style: italic;
@@ -87,24 +108,26 @@
     vertical-align: 4px;
   }
 
+  /* ---------- GRID ---------- */
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 65px;                  /* slightly tighter */
+    gap: 80px;
   }
 
-  .col { display: flex; flex-direction: column; gap: 42px; }
+  .col { display: flex; flex-direction: column; gap: 50px; }
 
+  /* ---------- SECTION ---------- */
   .sec h2 {
     font-family: 'Playfair Display', serif;
     font-weight: 900;
-    font-size: 78px;            /* reduced from 84px */
+    font-size: 84px;
     letter-spacing: -2px;
     line-height: 1;
     color: var(--cream);
     display: flex;
     align-items: baseline;
-    gap: 26px;
+    gap: 28px;
     margin-bottom: 8px;
   }
 
@@ -122,24 +145,27 @@
     letter-spacing: 0.3em;
     color: var(--gold);
     text-transform: uppercase;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 
+  /* Signature: red label */
+  .sec.signature h2 { color: var(--cream); }
   .sec.signature h2::before {
     content: '★';
     color: var(--red);
-    font-size: 68px;
+    font-size: 72px;
     transform: translateY(-4px);
   }
 
+  /* ---------- ITEMS ---------- */
   .items { list-style: none; }
 
   .item {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: baseline;
-    gap: 30px;
-    padding: 12px 0;            /* slightly reduced */
+    gap: 32px;
+    padding: 14px 0;
     border-bottom: 2px dashed rgba(255, 248, 238, 0.10);
   }
 
@@ -148,7 +174,7 @@
   .item .name {
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
-    font-size: 42px;
+    font-size: 44px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--cream);
@@ -159,6 +185,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 26px;
+    letter-spacing: 0.01em;
     color: var(--cream-dim);
     text-transform: none;
     margin-top: 6px;
@@ -168,29 +195,307 @@
   .item .price {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    font-size: 46px;
+    font-size: 48px;
     color: var(--gold);
     font-variant-numeric: tabular-nums;
     text-align: right;
     min-width: 110px;
   }
 
-  .signature .item .name { font-size: 54px; }
-  .signature .item .price { font-size: 54px; color: var(--red); }
+  /* Signature item: bigger, redder */
+  .signature .item .name {
+    font-size: 56px;
+    font-weight: 600;
+    color: var(--cream);
+  }
+  .signature .item .price {
+    font-size: 56px;
+    color: var(--red);
+    text-align: right;
+    min-width: 130px;
+  }
+  .signature .item {
+    padding: 20px 0;
+    border-bottom: 2px solid rgba(245, 197, 24, 0.18);
+  }
 
-  /* Keep all your original tiered, deluxe, combo, shakes, etc. styles exactly as they were */
-  .tiered { /* your original tiered styles */ }
-  .deluxe-line { /* your original */ }
-  .combo-banner { /* your original */ }
-  .free-list { /* your original */ }
-  .note { /* your original */ }
-  .topping-grid { /* your original */ }
-  .ic-toppings { /* your original */ }
-  .foot { /* your original */ }
+  /* ---------- TIERED PRICING (single/double/triple) ---------- */
+  .tiered {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    gap: 0 36px;
+    align-items: baseline;
+    padding: 20px 0;
+    border-bottom: 2px solid rgba(245, 197, 24, 0.18);
+  }
+  .tiered .name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 52px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .tiered .desc {
+    grid-column: 1 / -1;
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-size: 26px;
+    color: var(--cream-dim);
+    margin-top: 8px;
+  }
+  .tier {
+    text-align: center;
+    min-width: 140px;
+  }
+  .tier-label {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .tier-price {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: var(--cream);
+    font-variant-numeric: tabular-nums;
+    display: block;
+    text-align: center;
+    min-width: 110px;
+  }
+
+  /* ---------- SECTION SINGLE-PRICE (price stated once in the heading) ---------- */
+  .sec-price {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 56px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    margin-left: 8px;
+    flex: 0 0 auto;
+  }
+  /* keep the gold rule to the RIGHT of the price */
+  .shakes-sec h2 { gap: 24px; }
+  .shakes-sec h2::after { order: 3; }
+  .shakes-sec .sec-price { order: 2; }
+
+  /* ---------- DELUXE UPSELL LINE ---------- */
+  .deluxe-line {
+    margin-top: 24px;
+    padding: 24px 32px;
+    background: rgba(245, 197, 24, 0.08);
+    border-left: 6px solid var(--gold);
+  }
+  .deluxe-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 42px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--cream);
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+  .deluxe-plus {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 42px;
+    color: var(--gold);
+  }
+  .deluxe-desc {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-size: 26px;
+    color: var(--cream-dim);
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+
+  /* ---------- TOPPINGS / ADD-ON GRIDS ---------- */
+  .topping-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 48px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-top: 20px;
+  }
+  .topping-grid .row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px dashed rgba(255, 248, 238, 0.08);
+    padding: 8px 0;
+  }
+  .topping-grid .row .v {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-align: right;
+    min-width: 60px;
+  }
+
+  /* ---------- FREE LIST (no prices — for free veggies / sauce flavors) ---------- */
+  .free-list {
+    font-family: 'Oswald', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--cream);
+    line-height: 1.6;
+    padding: 8px 0;
+  }
+
+  /* ---------- CALLOUT NOTE ---------- */
+  .note {
+    background: var(--gold);
+    color: var(--char);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 28px;
+    letter-spacing: 0.1em;
+    padding: 16px 28px;
+    display: inline-block;
+    margin-bottom: 20px;
+    transform: rotate(-1deg);
+  }
+
+  .note.red {
+    background: var(--red);
+    color: #FFF8EE;
+  }
+
+  /* ---------- LOADED FRIES SUBSECTION ---------- */
+  .loaded-fries .item .name { font-size: 40px; }
+
+  /* ---------- SALADS SUBSECTION ---------- */
+  .salads .item .name { font-size: 40px; }
+
+  /* ---------- ICE CREAM TOPPINGS ---------- */
+  .ic-toppings {
+    margin-top: 24px;
+    padding: 24px 32px;
+    background: rgba(245, 197, 24, 0.08);
+    border-left: 6px solid var(--gold);
+  }
+  .ic-toppings .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .ic-toppings .opts {
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    color: var(--cream-dim);
+    line-height: 1.6;
+  }
+
+  /* ---------- COMBO BANNER ---------- */
+  .combo-banner {
+    background: var(--red);
+    color: #FFF8EE;
+    padding: 36px 48px;
+    margin: 16px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    border: 4px solid var(--gold);
+    box-shadow: 12px 12px 0 var(--char);
+  }
+  .combo-banner .lead {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 56px;
+    line-height: 1;
+  }
+  .combo-banner .sub {
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    opacity: 0.85;
+  }
+  .combo-banner .price-tag {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 88px;
+    color: #FFF8EE;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* ---------- SALAD DESCRIPTION BLOCK ---------- */
+  .salad-desc {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-size: 26px;
+    color: var(--cream-dim);
+    line-height: 1.5;
+    margin-bottom: 16px;
+    padding: 16px 24px;
+    border-left: 4px solid var(--red);
+    background: rgba(217, 43, 43, 0.06);
+  }
+
+  /* ---------- FOOTER ---------- */
+  .foot {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 4px solid var(--gold);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+  }
+  .foot .dot { color: var(--red); margin: 0 24px; }
+
+  /* ---------- FIT-TO-SCREEN SCALING ----------
+     The menu is built at a fixed 2160px-wide portrait canvas.
+     #viewport fills whatever box the PiSignage frame actually gives us
+     (100vw × 100vh), and we scale #stage from THAT measured box —
+     never trusting a single reported width number. */
+  html, body { height: 100%; overflow: hidden; }
+
+  #viewport {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2160px;
+    /* height set by the fit() script from real content height */
+    transform-origin: top left;
+  }
 </style>
 </head>
 <body>
 
+<div id="viewport">
+<div id="stage">
 <div class="menu">
   <div class="inner">
 
@@ -201,7 +506,8 @@
     </header>
 
     <div class="grid">
-<!-- ============ LEFT COLUMN: Entrées (cheeseburgers anchor the read) ============ -->
+
+      <!-- ============ LEFT COLUMN: Entrées (cheeseburgers anchor the read) ============ -->
       <div class="col">
 
         <!-- SMASHBURGERS -->
@@ -459,7 +765,6 @@
       </div>
     </div>
 
-
     <!-- FOOTER -->
     <footer class="foot">
       <span>1395 Mulholland St</span>
@@ -471,8 +776,47 @@
 
   </div>
 </div>
+</div>
+</div>
 
 <script>
+  // Scale to the REAL rendered box of #viewport, not a reported number.
+  // #viewport is 100vw×100vh, so it equals whatever the PiSignage frame
+  // actually gives us. We fill its width and guard against bottom clip.
+  (function () {
+    var DESIGN_W = 2160;
+    var viewport = document.getElementById('viewport');
+    var stage = document.getElementById('stage');
+    var menu = stage.querySelector('.menu');
+    function fit() {
+      var boxW = viewport.clientWidth;
+      var boxH = viewport.clientHeight;
+      var contentH = menu.scrollHeight;
+      stage.style.height = contentH + 'px';
+      // fill the real width edge-to-edge
+      var scale = boxW / DESIGN_W;
+      // if that would run past the bottom, fall back to height-fit
+      if (contentH * scale > boxH) {
+        scale = boxH / contentH;
+      }
+      stage.style.transform = 'scale(' + scale + ')';
+      // center within the real box
+      var left = (boxW - DESIGN_W * scale) / 2;
+      var top = (boxH - contentH * scale) / 2;
+      stage.style.left = (left > 0 ? left : 0) + 'px';
+      stage.style.top = (top > 0 ? top : 0) + 'px';
+    }
+    window.addEventListener('resize', fit);
+    window.addEventListener('orientationchange', fit);
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(fit); }
+    window.addEventListener('load', fit);
+    // re-measure shortly after load in case the frame resizes us late
+    setTimeout(fit, 300);
+    setTimeout(fit, 1500);
+    fit();
+  })();
+
+  // Last updated date
   const foot = document.querySelector('.foot');
   if (foot) {
     const updateSpan = document.createElement('span');
