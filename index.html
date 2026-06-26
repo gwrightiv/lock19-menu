@@ -469,23 +469,33 @@
   .foot .dot { color: var(--red); margin: 0 24px; }
 
   /* ---------- FIT-TO-SCREEN SCALING ----------
-     The menu is built at a fixed 2160 × 3840 portrait canvas.
-     #stage holds it at native size; JS scales the whole thing
-     as one unit to fit any screen — no reflow, no cutoff. */
+     The menu is built at a fixed 2160px-wide portrait canvas.
+     #viewport fills whatever box the PiSignage frame actually gives us
+     (100vw × 100vh), and we scale #stage from THAT measured box —
+     never trusting a single reported width number. */
   html, body { height: 100%; overflow: hidden; }
 
-  #stage {
+  #viewport {
     position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #stage {
+    position: absolute;
     top: 0;
     left: 0;
     width: 2160px;
-    /* height is set by the fit() script from real content height */
+    /* height set by the fit() script from real content height */
     transform-origin: top left;
   }
 </style>
 </head>
 <body>
 
+<div id="viewport">
 <div id="stage">
 <div class="menu">
   <div class="inner">
@@ -768,34 +778,42 @@
   </div>
 </div>
 </div>
+</div>
 
 <script>
-  // Scale the fixed-width canvas to fill the screen WIDTH (no side bars).
-  // Content height is measured live so we can warn/guard against clipping.
+  // Scale to the REAL rendered box of #viewport, not a reported number.
+  // #viewport is 100vw×100vh, so it equals whatever the PiSignage frame
+  // actually gives us. We fill its width and guard against bottom clip.
   (function () {
     var DESIGN_W = 2160;
+    var viewport = document.getElementById('viewport');
     var stage = document.getElementById('stage');
     var menu = stage.querySelector('.menu');
     function fit() {
+      var boxW = viewport.clientWidth;
+      var boxH = viewport.clientHeight;
       var contentH = menu.scrollHeight;
       stage.style.height = contentH + 'px';
-      // fill width edge-to-edge; extra space (if any) falls to top/bottom
-      var scale = window.innerWidth / DESIGN_W;
-      // safety: if filling width would push content taller than the screen,
-      // fall back to height-fit so nothing clips off the bottom
-      if (contentH * scale > window.innerHeight) {
-        scale = window.innerHeight / contentH;
+      // fill the real width edge-to-edge
+      var scale = boxW / DESIGN_W;
+      // if that would run past the bottom, fall back to height-fit
+      if (contentH * scale > boxH) {
+        scale = boxH / contentH;
       }
       stage.style.transform = 'scale(' + scale + ')';
-      var left = (window.innerWidth - DESIGN_W * scale) / 2;
+      // center within the real box
+      var left = (boxW - DESIGN_W * scale) / 2;
+      var top = (boxH - contentH * scale) / 2;
       stage.style.left = (left > 0 ? left : 0) + 'px';
-      var top = (window.innerHeight - contentH * scale) / 2;
       stage.style.top = (top > 0 ? top : 0) + 'px';
     }
     window.addEventListener('resize', fit);
     window.addEventListener('orientationchange', fit);
     if (document.fonts && document.fonts.ready) { document.fonts.ready.then(fit); }
     window.addEventListener('load', fit);
+    // re-measure shortly after load in case the frame resizes us late
+    setTimeout(fit, 300);
+    setTimeout(fit, 1500);
     fit();
   })();
 
