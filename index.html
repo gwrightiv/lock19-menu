@@ -479,7 +479,7 @@
     top: 0;
     left: 0;
     width: 2160px;
-    height: 3840px;
+    /* height is set by the fit() script from real content height */
     transform-origin: top left;
   }
 </style>
@@ -770,19 +770,30 @@
 </div>
 
 <script>
-  // Scale the fixed 2160×3840 canvas to fit the screen (no cutoff, no reflow)
+  // Scale the fixed-width canvas to fit the screen, measuring the REAL
+  // content height so nothing clips no matter how long the menu gets.
   (function () {
-    var DESIGN_W = 2160, DESIGN_H = 3840;
+    var DESIGN_W = 2160;
     var stage = document.getElementById('stage');
+    var menu = stage.querySelector('.menu');
     function fit() {
-      var scale = Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H);
+      // let the menu take its natural height, then measure it
+      var contentH = menu.scrollHeight;
+      stage.style.height = contentH + 'px';
+      var scale = Math.min(window.innerWidth / DESIGN_W, window.innerHeight / contentH);
       stage.style.transform = 'scale(' + scale + ')';
       // center horizontally if the screen is wider than the scaled board
       var left = (window.innerWidth - DESIGN_W * scale) / 2;
       stage.style.left = (left > 0 ? left : 0) + 'px';
+      // center vertically if the screen is taller than the scaled board
+      var top = (window.innerHeight - contentH * scale) / 2;
+      stage.style.top = (top > 0 ? top : 0) + 'px';
     }
     window.addEventListener('resize', fit);
     window.addEventListener('orientationchange', fit);
+    // re-fit once fonts have loaded (font swap changes height)
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(fit); }
+    window.addEventListener('load', fit);
     fit();
   })();
 
