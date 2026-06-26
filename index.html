@@ -201,18 +201,264 @@
     </header>
 
     <div class="grid">
-
-      <!-- LEFT COLUMN (your original content) -->
+<!-- ============ LEFT COLUMN: Entrées (cheeseburgers anchor the read) ============ -->
       <div class="col">
-        <!-- Paste your full original left column sections here (Smashburgers with tiered pricing, Sandwiches, Loaded Fries, Salads, Sides) -->
+
+        <!-- SMASHBURGERS -->
+        <section class="sec">
+          <h2>Smashburgers</h2>
+          <div class="tiered">
+            <div class="name">Smash Cheeseburger</div>
+            <div class="tier">
+              <span class="tier-label">Single</span>
+              <span class="tier-price">8</span>
+            </div>
+            <div class="tier">
+              <span class="tier-label">Double</span>
+              <span class="tier-price">11</span>
+            </div>
+            <div class="tier">
+              <span class="tier-label">Triple</span>
+              <span class="tier-price">15</span>
+            </div>
+            <div class="desc">Patty · American cheese · toasted bun. No cheese? Subtract $1.</div>
+          </div>
+
+          <div class="deluxe-line">
+            <div class="deluxe-name">Go all the way</div>
+            <div class="deluxe-desc">Lettuce, tomato, onion, pickles &amp; special sauce. Hold what you like — price is the same.</div>
+          </div>
+        </section>
+
+        <!-- SANDWICHES -->
+        <section class="sec">
+          <h2>Sandwiches</h2>
+          <ul class="items">
+            <li class="item">
+              <div class="name">Fish Sandwich</div>
+              <div class="price">11</div>
+            </li>
+            <li class="item">
+              <div class="name">Grilled Chicken Sandwich</div>
+              <div class="price">12</div>
+            </li>
+            <li class="item">
+              <div class="name">Pork Tenderloin</div>
+              <div class="price">12</div>
+            </li>
+            <li class="item">
+              <div class="name">Fried Hotdog</div>
+              <div class="price">7</div>
+            </li>
+            <li class="item">
+              <div class="name">Falafel Sandwich<span class="diet">v</span></div>
+              <div class="price">12</div>
+            </li>
+            <li class="item">
+              <div class="name">Grilled Cheese<span class="diet"></span></div>
+              <div class="price">5</div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- LOADED FRIES -->
+        <section class="sec loaded-fries">
+          <span class="note">No bun · piled on fries</span>
+          <h2>Loaded Fries</h2>
+          <ul class="items">
+            <li class="item">
+              <div class="name">Cheeseburger</div>
+              <div class="price">15</div>
+            </li>
+            <li class="item">
+              <div class="name">Burger</div>
+              <div class="price">14</div>
+            </li>
+            <li class="item">
+              <div class="name">Dam Burger</div>
+              <div class="price">18</div>
+            </li>
+            <li class="item">
+              <div class="name">Hot Dam Burger</div>
+              <div class="price">19</div>
+            </li>
+            <li class="item">
+              <div class="name">Fish &amp; Chips</div>
+              <div class="price">14</div>
+            </li>
+            <li class="item">
+              <div class="name">Chicken</div>
+              <div class="price">15</div>
+            </li>
+            <li class="item">
+              <div class="name">Pork Tenderloin</div>
+              <div class="price">16</div>
+            </li>
+            <li class="item">
+              <div class="name">Falafel<span class="diet">v</span></div>
+              <div class="price">15</div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- SALADS -->
+        <section class="sec salads">
+          <span class="note red">Bun-free · on a bed of greens</span>
+          <h2>Salads</h2>
+          <div class="salad-desc">
+            Choice of protein over fresh lettuce with tomato, onion, pickles & sauce.
+          </div>
+          <ul class="items">
+            <li class="item">
+              <div class="name">Cheeseburger</div>
+              <div class="price">11</div>
+            </li>
+            <li class="item">
+              <div class="name">Burger</div>
+              <div class="price">10</div>
+            </li>
+            <li class="item">
+              <div class="name">Chicken</div>
+              <div class="price">12</div>
+            </li>
+            <li class="item">
+              <div class="name">Falafel<span class="diet">v</span></div>
+              <div class="price">12</div>
+            </li>
+            <li class="item">
+              <div class="name">Veggie</div>
+              <div class="price">8</div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- SIDES (moved from right column to balance height) -->
+        <section class="sec">
+          <h2>Sides</h2>
+          <ul class="items">
+            <li class="item"><div class="name">Fries<span class="diet">gf</span></div><div class="price">7</div></li>
+            <li class="item"><div class="name">Onion Rings</div><div class="price">8</div></li>
+            <li class="item"><div class="name">Chips</div><div class="price">2</div></li>
+            <li class="item"><div class="name">Brownie</div><div class="price">4</div></li>
+            <li class="item"><div class="name">Cookie</div><div class="price">4</div></li>
+          </ul>
+        </section>
+
       </div>
 
-      <!-- RIGHT COLUMN (your original content) -->
+      <!-- ============ RIGHT COLUMN: Signatures hero + everything else ============ -->
       <div class="col">
-        <!-- Paste your full original right column sections here (Signatures, Combo banner, Shakes, Ice Cream, Drinks, Add-Ons) -->
-      </div>
 
+        <!-- SIGNATURES (HERO TOP-RIGHT — Z-pattern endpoint) -->
+        <section class="sec signature">
+          <div class="kicker">House Specialties</div>
+          <h2>Signatures</h2>
+
+          <div class="item">
+            <div>
+              <div class="name">Dam Burger</div>
+              <div class="desc">Double cheeseburger, Oklahoma-style — onions smashed into the patties and caramelized into the crust, garlic & special sauce, lettuce & pickles. Named for Keokuk Lock & Dam 19, but go ahead and call it the best dam burger you'll eat.</div>
+            </div>
+            <div class="price">14</div>
+          </div>
+
+          <div class="item">
+            <div>
+              <div class="name">Hot Dam Burger</div>
+              <div class="desc">The Dam with the heat turned up — grilled fresh jalapeños & onions, pepperjack, gochujang aioli, garlic sauce, and pickled jalapeños. Good heat that won't ruin your vacation — order one and we yell it right back. Hot Dam!</div>
+            </div>
+            <div class="price">15</div>
+          </div>
+        </section>
+
+        <!-- COMBO BANNER (stays attached to hero) -->
+        <div class="combo-banner">
+          <div>
+            <div class="lead">Make it a meal</div>
+            <div class="sub">Add fries to any entrée</div>
+          </div>
+          <div class="price-tag">+4</div>
+        </div>
+
+        <!-- SHAKES -->
+        <section class="sec shakes-sec">
+          <h2>Shakes <span class="sec-price">8</span></h2>
+          <div class="free-list">
+            Vanilla · Chocolate · Strawberry · Peppermint · Cookies 'n Cream<span class="diet">gf</span> · Caramel Cookie Crunch
+          </div>
+          <ul class="items" style="margin-top:20px;">
+            <li class="item"><div class="name">Soda Float</div><div class="price">6.50</div></li>
+          </ul>
+        </section>
+
+        <!-- ICE CREAM -->
+        <section class="sec">
+          <h2>Ice Cream</h2>
+          <div class="kicker">Vanilla · Chocolate · Strawberry</div>
+          <ul class="items">
+            <li class="item">
+              <div>
+                <div class="name">Small</div>
+                <div class="desc">1 scoop</div>
+              </div>
+              <div class="price">3</div>
+            </li>
+            <li class="item">
+              <div>
+                <div class="name">Large</div>
+                <div class="desc">2 scoops</div>
+              </div>
+              <div class="price">6</div>
+            </li>
+          </ul>
+          <div class="ic-toppings">
+            <div class="label">Toppings · 1 each</div>
+            <div class="opts">
+              Crushed Oreos<span class="diet">gf</span> · Biscoff Crumbles · Toasted Coconut · Sprinkles · Chocolate Sauce · Caramel Sauce
+            </div>
+          </div>
+        </section>
+
+        <!-- DRINKS -->
+        <section class="sec">
+          <h2>Drinks</h2>
+          <ul class="items">
+            <li class="item"><div class="name">Fountain</div><div class="price">3.50</div></li>
+            <li class="item"><div class="name">Soda Can</div><div class="price">2</div></li>
+            <li class="item"><div class="name">Bottled Tea</div><div class="price">3</div></li>
+            <li class="item"><div class="name">Bottled Water</div><div class="price">2</div></li>
+            <li class="item"><div class="name">Chocolate Milk</div><div class="price">2</div></li>
+            <li class="item"><div class="name">Apple Juice</div><div class="price">2</div></li>
+          </ul>
+        </section>
+
+        <!-- TOPPINGS & ADD-ONS -->
+        <section class="sec">
+          <h2>Add-Ons</h2>
+
+          <div class="kicker" style="margin-top:12px;">Want it dressed? Make it a Deluxe</div>
+          <div class="free-list">
+            Lettuce · Onion · Tomato · Pickles · Sauce
+          </div>
+
+          <div class="kicker" style="margin-top:24px;">Our sauces<span class="diet">gf</span></div>
+          <div class="free-list">
+            Special Sauce · Tartar Sauce · Garlic Sauce · Ranch
+          </div>
+
+          <div class="kicker" style="margin-top:24px;">Premium add-ons</div>
+          <div class="topping-grid">
+            <div class="row"><span>Extra Sauce</span><span class="v">.50</span></div>
+            <div class="row"><span>Jalapeños</span><span class="v">.50</span></div>
+            <div class="row"><span>Sauerkraut</span><span class="v">.50</span></div>
+            <div class="row"><span>Cheese</span><span class="v">+1</span></div>
+            <div class="row"><span>Bacon</span><span class="v">+2</span></div>
+          </div>
+        </section>
+
+      </div>
     </div>
+
 
     <!-- FOOTER -->
     <footer class="foot">
