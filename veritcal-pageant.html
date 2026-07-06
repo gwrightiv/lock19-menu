@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lock 19 — Menu (4K)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --char: #1A1A1A;
+    --char-2: #232323;
+    --red: #C81E1E;
+    --gold: #B8860B;
+    --cream: #1A1A1A;
+    --cream-dim: rgba(26, 26, 26, 0.66);
+    --rule: rgba(184, 134, 11, 0.55);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #faf6ee;
+    color: var(--cream);
+    font-family: 'Oswald', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .menu {
+    max-width: 2160px;
+    margin: 0 auto;
+    padding: 55px 90px 45px;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(184, 134, 11, 0.08), transparent 50%),
+      radial-gradient(ellipse at 90% 100%, rgba(200, 30, 30, 0.07), transparent 55%),
+      linear-gradient(180deg, #fffdf8 0%, #f7f1e6 50%, #f1e9da 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.5;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  .menu::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 45%, rgba(120, 90, 30, 0.10) 100%);
+    pointer-events: none;
+  }
+
+  .inner { position: relative; z-index: 2; }
+
+  .masthead {
+    text-align: center;
+    padding-bottom: 28px;
+    border-bottom: 4px solid var(--gold);
+    margin-bottom: 36px;
+    position: relative;
+  }
+  .masthead .logo {
+    display: block;
+    margin: 0 auto;
+    width: 820px;
+    max-width: 90%;
+    height: auto;
+  }
+  .masthead .logo.invert {
+    filter: invert(96%) sepia(8%) saturate(380%) hue-rotate(330deg) brightness(105%) contrast(100%);
+  }
+  .masthead .tag {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5em;
+    font-size: 32px;
+    margin-top: 24px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .diet {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-transform: lowercase;
+    margin-left: 12px;
+    vertical-align: 4px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .col { display: flex; flex-direction: column; gap: 32px; }
+
+  .sec h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 76px;
+    letter-spacing: -2px;
+    line-height: 1;
+    color: var(--cream);
+    display: flex;
+    align-items: baseline;
+    gap: 28px;
+    margin-bottom: 8px;
+  }
+  .sec h2::after {
+    content: '';
+    flex: 1;
+    height: 6px;
+    background: var(--gold);
+    transform: translateY(-12px);
+  }
+  .sec .kicker {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .sec.signature h2 { color: var(--cream); }
+  .sec.signature h2::before {
+    content: '★';
+    color: var(--red);
+    font-size: 72px;
+    transform: translateY(-4px);
+  }
+
+  .items { list-style: none; }
+  .item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 32px;
+    padding: 11px 0;
+    border-bottom: 2px dashed rgba(255, 248, 238, 0.10);
+  }
+  .item:last-child { border-bottom: none; }
+  .item .name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 44px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+  .item .desc {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    color: var(--cream-dim);
+    text-transform: none;
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .item .price {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    min-width: 110px;
+  }
+
+  .signature .item .name { font-size: 56px; font-weight: 600; color: var(--cream); }
+  .signature .item .price { font-size: 56px; color: var(--red); text-align: right; min-width: 130px; }
+  .signature .item { padding: 14px 0; border-bottom: 2px solid rgba(245, 197, 24, 0.18); }
+
+  .tiered {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    gap: 0 36px;
+    align-items: baseline;
+    padding: 20px 0;
+    border-bottom: 2px solid rgba(245, 197, 24, 0.18);
+  }
+  .tiered .name { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 52px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .tiered .desc { grid-column: 1 / -1; font-family: 'Inter', sans-serif; font-style: italic; font-size: 26px; color: var(--cream-dim); margin-top: 8px; }
+  .tier { text-align: center; min-width: 140px; }
+  .tier-label { display: block; font-family: 'Oswald', sans-serif; font-size: 20px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+  .tier-price { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 48px; color: var(--cream); font-variant-numeric: tabular-nums; display: block; text-align: center; min-width: 110px; }
+
+  .sec-price { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 56px; color: var(--gold); font-variant-numeric: tabular-nums; margin-left: 8px; flex: 0 0 auto; }
+  .shakes-sec h2 { gap: 24px; }
+  .shakes-sec h2::after { order: 3; }
+  .shakes-sec .sec-price { order: 2; }
+
+  .deluxe-line { margin-top: 16px; padding: 18px 32px; background: rgba(245, 197, 24, 0.08); border-left: 6px solid var(--gold); }
+  .deluxe-name { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 42px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--cream); display: flex; align-items: baseline; gap: 20px; }
+  .deluxe-plus { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 42px; color: var(--gold); }
+  .deluxe-desc { font-family: 'Inter', sans-serif; font-style: italic; font-size: 26px; color: var(--cream-dim); line-height: 1.5; margin-top: 10px; }
+
+  .topping-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 48px; font-family: 'Oswald', sans-serif; font-size: 32px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--cream); margin-top: 20px; }
+  .topping-grid .row { display: flex; justify-content: space-between; border-bottom: 2px dashed rgba(255, 248, 238, 0.08); padding: 8px 0; }
+  .topping-grid .row .v { color: var(--gold); font-family: 'Oswald', sans-serif; font-weight: 700; text-align: right; min-width: 60px; }
+
+  .free-list { font-family: 'Oswald', sans-serif; font-size: 32px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--cream); line-height: 1.6; padding: 8px 0; }
+
+  .note { background: var(--gold); color: var(--char); font-family: 'Oswald', sans-serif; font-weight: 600; text-transform: uppercase; font-size: 26px; letter-spacing: 0.1em; padding: 12px 24px; display: inline-block; margin-bottom: 14px; transform: rotate(-1deg); }
+  .note.red { background: var(--red); color: #FFF8EE; }
+
+  .loaded-fries .item .name { font-size: 40px; }
+  .salads .item .name { font-size: 40px; }
+
+  .ic-toppings { margin-top: 20px; padding: 18px 28px; background: rgba(245, 197, 24, 0.08); border-left: 6px solid var(--gold); }
+  .ic-toppings .label { font-family: 'Oswald', sans-serif; font-size: 24px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+  .ic-toppings .opts { font-family: 'Inter', sans-serif; font-size: 25px; color: var(--cream-dim); line-height: 1.55; }
+
+  /* Compact dessert / ice-cream line */
+  .dessert-line {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    padding: 14px 0 10px;
+    border-bottom: 2px solid rgba(245, 197, 24, 0.18);
+  }
+  .dessert-line .dl-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 38px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--cream);
+    white-space: nowrap;
+  }
+  .dessert-line .dl-flavors {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-size: 23px;
+    color: var(--cream-dim);
+    white-space: nowrap;
+  }
+  .dessert-line .dl-sizes {
+    margin-left: auto;
+    font-family: 'Oswald', sans-serif;
+    font-size: 34px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .dessert-line .dl-sizes b { color: var(--cream); font-weight: 600; }
+
+  .combo-banner { background: var(--red); color: #FFF8EE; padding: 24px 48px; margin: 8px 0 0; display: flex; align-items: center; justify-content: space-between; gap: 40px; border: 4px solid var(--gold); box-shadow: 8px 8px 0 var(--char); }
+  .combo-banner .lead { font-family: 'Playfair Display', serif; font-weight: 900; font-style: italic; font-size: 56px; line-height: 1; }
+  .combo-banner .sub { font-family: 'Oswald', sans-serif; font-size: 26px; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 8px; opacity: 0.85; }
+  .combo-banner .price-tag { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 88px; color: #FFF8EE; line-height: 1; white-space: nowrap; }
+
+  .salad-desc { font-family: 'Inter', sans-serif; font-style: italic; font-size: 25px; color: var(--cream-dim); line-height: 1.4; margin-bottom: 12px; padding: 12px 24px; border-left: 4px solid var(--red); background: rgba(217, 43, 43, 0.06); }
+
+  .foot { margin-top: 44px; padding-top: 28px; border-top: 4px solid var(--gold); display: flex; justify-content: space-between; align-items: center; font-family: 'Oswald', sans-serif; font-size: 26px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-dim); }
+  .foot .dot { color: var(--red); margin: 0 24px; }
+
+  /* ---------- FIT-TO-SCREEN ---------- */
+  html, body { height: 100%; overflow: hidden; }
+  #viewport { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; }
+  #stage { position: absolute; top: 0; left: 0; width: 2160px; transform-origin: top left; }
+
+</style>
+</head>
+<body>
+
+<div id="viewport">
+<div id="stage">
+<div class="menu">
+  <div class="inner">
+
+    <header class="masthead">
+      <img class="logo" src="logo.png" alt="Lock 19">
+      <div class="tag">Smash Burgers · Nauvoo, IL</div>
+    </header>
+
+    <div class="grid">
+
+      <div class="col">
+
+        <section class="sec">
+          <h2>Smashburgers</h2>
+          <div class="tiered">
+            <div class="name">Smash Cheeseburger</div>
+            <div class="tier"><span class="tier-label">Single</span><span class="tier-price">8</span></div>
+            <div class="tier"><span class="tier-label">Double</span><span class="tier-price">11</span></div>
+            <div class="tier"><span class="tier-label">Triple</span><span class="tier-price">15</span></div>
+            <div class="desc">Patty · American cheese · toasted bun. No cheese? Subtract $1.</div>
+          </div>
+          <div class="deluxe-line">
+            <div class="deluxe-name">Go all the way</div>
+            <div class="deluxe-desc">Lettuce, tomato, onion, pickles &amp; special sauce. Hold what you like — price is the same.</div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h2>Sandwiches</h2>
+          <ul class="items">
+            <li class="item"><div class="name">Grilled Chicken Sandwich</div><div class="price">12</div></li>
+            <li class="item"><div class="name">Falafel Sandwich<span class="diet">v</span></div><div class="price">12</div></li>
+            <li class="item"><div class="name">Grilled Cheese</div><div class="price">5</div></li>
+          </ul>
+        </section>
+
+        <section class="sec loaded-fries">
+          <span class="note">No bun · piled on fries</span>
+          <h2>Loaded Fries</h2>
+          <ul class="items">
+            <li class="item"><div class="name">Cheeseburger</div><div class="price">15</div></li>
+            <li class="item"><div class="name">Burger</div><div class="price">14</div></li>
+            <li class="item"><div class="name">Dam Burger</div><div class="price">18</div></li>
+            <li class="item"><div class="name">Hot Dam Burger</div><div class="price">19</div></li>
+            <li class="item"><div class="name">Chicken</div><div class="price">15</div></li>
+            <li class="item"><div class="name">Falafel<span class="diet">v</span></div><div class="price">15</div></li>
+          </ul>
+        </section>
+
+        <section class="sec salads">
+          <span class="note red">Bun-free · on a bed of greens</span>
+          <h2>Salads</h2>
+          <div class="salad-desc">Choice of protein over fresh lettuce with tomato, onion, pickles &amp; sauce.</div>
+          <ul class="items">
+            <li class="item"><div class="name">Cheeseburger</div><div class="price">11</div></li>
+            <li class="item"><div class="name">Burger</div><div class="price">10</div></li>
+            <li class="item"><div class="name">Chicken</div><div class="price">12</div></li>
+            <li class="item"><div class="name">Falafel<span class="diet">v</span></div><div class="price">12</div></li>
+            <li class="item"><div class="name">Veggie</div><div class="price">8</div></li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h2>Sides</h2>
+          <ul class="items">
+            <li class="item"><div class="name">Fries<span class="diet">gf</span></div><div class="price">7</div></li>
+            <li class="item"><div class="name">Chips</div><div class="price">2</div></li>
+          </ul>
+        </section>
+
+      </div>
+
+      <div class="col">
+
+        <section class="sec signature">
+          <div class="kicker">House Specialties</div>
+          <h2>Signatures</h2>
+          <div class="item">
+            <div>
+              <div class="name">Dam Burger</div>
+              <div class="desc">Double cheeseburger, Oklahoma-style — onions smashed into the patties and caramelized into the crust, garlic &amp; special sauce, lettuce &amp; pickles. Named for Keokuk Lock &amp; Dam 19, but go ahead and call it the best dam burger you'll eat.</div>
+            </div>
+            <div class="price">14</div>
+          </div>
+          <div class="item">
+            <div>
+              <div class="name">Hot Dam Burger</div>
+              <div class="desc">The Dam with the heat turned up — grilled fresh jalapeños &amp; onions, pepperjack, gochujang aioli, garlic sauce, and pickled jalapeños. Good heat that won't ruin your vacation — order one and we yell it right back. Hot Dam!</div>
+            </div>
+            <div class="price">15</div>
+          </div>
+        </section>
+
+        <div class="combo-banner">
+          <div>
+            <div class="lead">Make it a meal</div>
+            <div class="sub">Add fries to any entrée</div>
+          </div>
+          <div class="price-tag">+4</div>
+        </div>
+
+        <section class="sec shakes-sec">
+          <h2>Shakes <span class="sec-price">8</span></h2>
+          <div class="free-list">Vanilla · Chocolate · Strawberry · Peppermint · Cookies 'n Cream<span class="diet">gf</span> · Caramel Cookie Crunch</div>
+          <ul class="items" style="margin-top:20px;">
+            <li class="item"><div class="name">Soda Float</div><div class="price">7</div></li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h2>Dessert</h2>
+          <div class="dessert-line">
+            <span class="dl-name">Ice Cream</span>
+            <span class="dl-flavors">Vanilla · Chocolate · Strawberry</span>
+            <span class="dl-sizes"><b>Small</b> 3 &nbsp;·&nbsp; <b>Large</b> 6</span>
+          </div>
+          <ul class="items">
+            <li class="item"><div class="name">Brownie</div><div class="price">4</div></li>
+            <li class="item"><div class="name">Cookie</div><div class="price">4</div></li>
+          </ul>
+          <div class="ic-toppings">
+            <div class="label">Ice Cream Toppings · 1 each</div>
+            <div class="opts">Crushed Oreos<span class="diet">gf</span> · Biscoff Crumbles · Toasted Coconut · Sprinkles · Chocolate Sauce · Caramel Sauce</div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h2>Drinks</h2>
+          <ul class="items">
+            <li class="item"><div class="name">Fountain</div><div class="price">3.50</div></li>
+            <li class="item"><div class="name">Soda Can</div><div class="price">2</div></li>
+            <li class="item"><div class="name">Bottled Tea</div><div class="price">3</div></li>
+            <li class="item"><div class="name">Bottled Water</div><div class="price">2</div></li>
+            <li class="item"><div class="name">Chocolate Milk</div><div class="price">2</div></li>
+            <li class="item"><div class="name">Apple Juice</div><div class="price">2</div></li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h2>Add-Ons</h2>
+          <div class="kicker" style="margin-top:12px;">Want it dressed? Make it a Deluxe</div>
+          <div class="free-list">Lettuce · Onion · Tomato · Pickles · Sauce</div>
+          <div class="kicker" style="margin-top:24px;">Our sauces<span class="diet">gf</span></div>
+          <div class="free-list">Special Sauce · Tartar Sauce · Garlic Sauce · Ranch</div>
+          <div class="kicker" style="margin-top:24px;">Premium add-ons</div>
+          <div class="topping-grid">
+            <div class="row"><span>Extra Sauce</span><span class="v">.50</span></div>
+            <div class="row"><span>Jalapeños</span><span class="v">.50</span></div>
+            <div class="row"><span>Sauerkraut</span><span class="v">.50</span></div>
+            <div class="row"><span>Cheese</span><span class="v">+1</span></div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <footer class="foot">
+      <span>1395 Mulholland St</span>
+      <span class="dot">●</span>
+      <span>Nauvoo, IL</span>
+      <span class="dot">●</span>
+      <span>217.453.2996</span>
+    </footer>
+
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+  // FILL WIDTH ALWAYS — no side bars, ever. scaleX = boxW/DESIGN_W.
+  // For height, allow a small vertical squish (up to MAX_SQUISH) so the
+  // board fits top-to-bottom without letterboxing. The squish is tiny
+  // (a few %) and imperceptible; it also absorbs the font-rendering
+  // differences between this player and any test browser. If content is
+  // SO tall that even max squish can't fit it, fall back to uniform
+  // scale-down so nothing ever clips.
+  (function () {
+    var DESIGN_W = 2160;
+    var MAX_SQUISH = 0.12;            // allow scaleY down to 88% of scaleX
+    var viewport = document.getElementById('viewport');
+    var stage = document.getElementById('stage');
+    var menu = stage.querySelector('.menu');
+    function fit() {
+      var boxW = viewport.clientWidth;
+      var boxH = viewport.clientHeight;
+      var contentH = menu.scrollHeight;
+      stage.style.height = contentH + 'px';
+
+      var scaleX = boxW / DESIGN_W;            // always fill width
+      var scaleYneeded = boxH / contentH;      // what height would require
+      var scaleY = scaleYneeded;
+      var mode = 'fill';
+
+      if (scaleY > scaleX) {
+        // content is SHORTER than the screen: don't stretch up, match X
+        scaleY = scaleX;
+        mode = 'fill';
+      } else if (scaleY < scaleX * (1 - MAX_SQUISH)) {
+        // content is too tall even for max squish: scale whole thing down
+        // uniformly (this can leave thin side bars, but only in the rare
+        // case the menu grows a lot — keeps everything visible).
+        scaleX = scaleY = scaleYneeded;
+        mode = 'shrink';
+      } else {
+        // content slightly too tall: squish vertically within allowance
+        mode = 'squish';
+      }
+
+      stage.style.transformOrigin = 'top left';
+      stage.style.transform = 'scaleX(' + scaleX + ') scaleY(' + scaleY + ')';
+      var usedW = DESIGN_W * scaleX;
+      var usedH = contentH * scaleY;
+      stage.style.left = (boxW > usedW ? (boxW - usedW) / 2 : 0) + 'px';
+      stage.style.top  = (boxH > usedH ? (boxH - usedH) / 2 : 0) + 'px';
+    }
+    window.addEventListener('resize', fit);
+    window.addEventListener('orientationchange', fit);
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(fit); }
+    window.addEventListener('load', fit);
+    setTimeout(fit, 300);
+    setTimeout(fit, 1500);
+    fit();
+  })();
+
+  var foot = document.querySelector('.foot');
+  if (foot) {
+    var updateSpan = document.createElement('span');
+    updateSpan.style.fontSize = '20px';
+    updateSpan.style.opacity = '0.7';
+    updateSpan.style.marginLeft = '24px';
+    updateSpan.textContent = '• Updated ' + new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+    foot.appendChild(updateSpan);
+  }
+</script>
+
+</body>
+</html>
